@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a0a0a;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 65, 0.03) 2px,
+            rgba(0, 255, 65, 0.03) 4px
+        );
+}
+
+h1 {
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 30px;
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #00ff41;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    border-left: 4px solid #00ff41;
+    padding-left: 15px;
+    padding-bottom: 5px;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    font-size: 1.2em;
+}
+
+h3 {
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 20px;
+    margin-bottom: 10px;
+    border-left: 3px solid #00ff41;
+    padding-left: 50px;
+    padding-bottom: 3px;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+button {
+    background: #000;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+button:hover {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    background: transparent;
+}
+
+input[type="range"]::-webkit-slider-track {
+    background: #1a1a1a;
+    border: 1px solid #00ff41;
+    height: 4px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #00ff41;
+    width: 16px;
+    height: 16px;
+    border-radius: 0;
+    box-shadow: 0 0 10px #00ff41;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ff41;
+    padding: 30px;
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+}
+
+.loops {
+    display: grid;
+    gap: 20px;
+    background: rgba(0, 255, 65, 0.05);
+    border: 2px solid #00ff41;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 30px rgba(0, 255, 65, 0.1);
+    position: relative;
+}
+
+.loops::before {
+    content: "LOOP MODULE";
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: #0a0a0a;
+    padding: 0 10px;
+    color: #00ff41;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    border: 2px solid #00ff41;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    transition: all 0.3s;
+    position: relative;
+}
+
+input[type="checkbox"]:hover {
+    box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+    border-color: #00ff41;
+}
+
+input[type="checkbox"]:checked {
+    background: #00ff41;
+    box-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41;
+}
+
+input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.load-loop {
+    display: inline-block;
+    background: #000;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    transition: all 0.3s;
+}
+
+.load-loop:hover,
+.load-loop:focus-visible {
+    background: #00ff41;
+    color: #000;
+    box-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41;
+}
+
+select {
+    background: #000;
+    color: #00ff41;
+    border: 2px solid #00ff41;
+    padding: 2px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+    transition: all 0.3s;
+}
+select:hover {
+    box-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41;
+}
+
+#compDetails {
+    display: none;
+}
+
+footer {
+    max-width: 800px;
+    margin: 20px auto 0;
+    padding-top: 12px;
+    border-top: 1px solid rgba(0, 255, 65, 0.6);
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+footer a {
+    color: #00ff41;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.7);
+    transition: text-shadow 0.3s, color 0.3s;
+}
+
+footer a:hover,
+footer a:focus-visible {
+    color: #fff;
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41;
+}
+

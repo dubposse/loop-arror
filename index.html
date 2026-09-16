@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="design.css">
+    <title>Loop Arror - Mix your audio loop pool</title>
+</head>
+<body>
+    <div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: Arial, sans-serif;">
+        <h1>loop arror</h1>
+        
+        <!-- Master FX Section -->
+        <div >
+            <h2 style="font-size: small;">Master Compressor</h2> 
+            <label>
+                <input type="checkbox" id="compEnabled" style="width: 15px; height: 15px; vertical-align: middle;"> <span style="font-size: 14px;">On</span>
+            </label>
+            
+            <label> 
+                <select id="compPreset">
+                    <option value="gentle">Gentle (Subtle)</option>
+                    <option value="medium" selected>Medium (Balanced)</option>
+                    <option value="heavy">Heavy (Punchy)</option>
+                    <option value="limiter">Limiter (Loud)</option>
+                    <option value="custom">Custom</option>
+                </select>
+            </label>
+            <br><br>
+            <div id="compDetails" >
+                <small><strong>Advanced Settings:</strong></small><br>
+                <label>Threshold: <input type="range" id="compThreshold" min="-100" max="0" value="-24" step="1"></label>
+                <span id="compThresholdValue">-24 dB</span>
+                <br><br>
+                <label>Knee: <input type="range" id="compKnee" min="0" max="40" value="30" step="1"></label>
+                <span id="compKneeValue">30 dB</span>
+                <br><br>
+                <label>Ratio: <input type="range" id="compRatio" min="1" max="20" value="12" step="0.1"></label>
+                <span id="compRatioValue">12:1</span>
+                <br><br>
+                <label>Attack: <input type="range" id="compAttack" min="0" max="1" value="0.003" step="0.001"></label>
+                <span id="compAttackValue">0.003 s</span>
+                <br><br>
+                <label>Release: <input type="range" id="compRelease" min="0" max="1" value="0.25" step="0.01"></label>
+                <span id="compReleaseValue">0.25 s</span>
+            </div>
+            <br>
+            <button id="toggleCompDetails" style="padding: 5px 10px; font-size: 12px;">Show Advanced</button>
+        </div> <br>
+        
+        <div id="loops">
+            <div class="loop-control" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <h3>Loop 1</h3>
+                <label class="load-loop" id="loadLabel1" for="file1">LOAD...ARROR [*.WAV]</label>
+                <input type="file" id="file1" accept="audio/*">
+                <br><br>
+                <label>Volume: <input type="range" id="volume1" min="0" max="100" value="50"></label>
+                <br><br>
+                <label>Pitch: <input type="range" id="pitch1" min="50" max="200" value="100" step="1"></label>
+                <span id="pitchValue1">100%</span>
+                <br><br>
+                <label>Distortion: <input type="range" id="distortion1" min="0" max="100" value="0" step="1"></label>
+                <span id="distortionValue1">0%</span>
+                <br><br>
+                <label>Ring Modulator: <input type="range" id="ringMod1" min="0" max="100" value="0" step="1"></label>
+                <span id="ringModValue1">0%</span>
+                <br><br>
+                <label>Filter: 
+                    <select id="filterType1">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                        <option value="none" selected>None</option>
+                    </select>
+                </label>
+                <br><br>
+                <label>Filter Frequency: <input type="range" id="filterFreq1" min="-100" max="100" value="0" step="1"></label>
+                <span id="filterFreqValue1">1000 Hz</span>
+                <br><br>
+                <div>
+                    <label class="loops">Start Point: <input type="range" id="start1" min="0" max="100" value="0" step="0.1"></label>
+                    <span id="startValue1">0.0s</span>
+                    <br>
+                    <label class="loops">End Point: <input type="range" id="end1" min="0" max="100" value="100" step="0.1"></label>
+                    <span id="endValue1">0.0s</span>
+                </div>
+                <br>
+                <button id="play1">Play</button>
+                <button id="stop1">Stop</button>
+            </div>
+
+            <div class="loop-control" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <h3>Loop 2</h3>
+                <label class="load-loop" id="loadLabel2" for="file2">LOAD...ARROR [*.WAV]</label>
+                <input type="file" id="file2" accept="audio/*">
+                <br><br>
+                <label>Volume: <input type="range" id="volume2" min="0" max="100" value="50"></label>
+                <br><br>
+                <label>Pitch: <input type="range" id="pitch2" min="50" max="200" value="100" step="1"></label>
+                <span id="pitchValue2">100%</span>
+                <br><br>
+                <label>Distortion: <input type="range" id="distortion2" min="0" max="100" value="0" step="1"></label>
+                <span id="distortionValue2">0%</span>
+                <br><br>
+                <label>Ring Modulator: <input type="range" id="ringMod2" min="0" max="100" value="0" step="1"></label>
+                <span id="ringModValue2">0%</span>
+                <br><br>
+                <label>Filter: 
+                    <select id="filterType2">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                        <option value="none" selected>None</option>
+                    </select>
+                </label>
+                <br><br>
+                <label>Filter Frequency: <input type="range" id="filterFreq2" min="-100" max="100" value="0" step="1"></label>
+                <span id="filterFreqValue2">1000 Hz</span>
+                <br><br>
+                <div>
+                    <label class="loops">Start Point: <input type="range" id="start2" min="0" max="100" value="0" step="0.1"></label>
+                    <span id="startValue2">0.0s</span>
+                    <br>
+                    <label class="loops">End Point: <input type="range" id="end2" min="0" max="100" value="100" step="0.1"></label>
+                    <span id="endValue2">0.0s</span>
+                </div>
+                <br>
+                <button id="play2">Play</button>
+                <button id="stop2">Stop</button>
+            </div>
+
+            <div class="loop-control" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <h3>Loop 3</h3>
+                <label class="load-loop" id="loadLabel3" for="file3">LOAD...ARROR [*.WAV]</label>
+                <input type="file" id="file3" accept="audio/*">
+                <br><br>
+                <label>Volume: <input type="range" id="volume3" min="0" max="100" value="50"></label>
+                <br><br>
+                <label>Pitch: <input type="range" id="pitch3" min="50" max="200" value="100" step="1"></label>
+                <span id="pitchValue3">100%</span>
+                <br><br>
+                <label>Distortion: <input type="range" id="distortion3" min="0" max="100" value="0" step="1"></label>
+                <span id="distortionValue3">0%</span>
+                <br><br>
+                <label>Ring Modulator: <input type="range" id="ringMod3" min="0" max="100" value="0" step="1"></label>
+                <span id="ringModValue3">0%</span>
+                <br><br>
+                <label>Filter: 
+                    <select id="filterType3">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                        <option value="none" selected>None</option>
+                    </select>
+                </label>
+                <br><br>
+                <label>Filter Frequency: <input type="range" id="filterFreq3" min="-100" max="100" value="0" step="1"></label>
+                <span id="filterFreqValue3">1000 Hz</span>
+                <br><br>
+                <div>
+                    <label class="loops">Start Point: <input type="range" id="start3" min="0" max="100" value="0" step="0.1"></label>
+                    <span id="startValue3">0.0s</span>
+                    <br>
+                    <label class="loops">End Point: <input type="range" id="end3" min="0" max="100" value="100" step="0.1"></label>
+                    <span id="endValue3">0.0s</span>
+                </div>
+                <br>
+                <button id="play3">Play</button>
+                <button id="stop3">Stop</button>
+            </div>
+
+            <div class="loop-control" style="margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+                <h3>Loop 4</h3>
+                <label class="load-loop" id="loadLabel4" for="file4">LOAD...ARROR [*.WAV]</label>
+                <input type="file" id="file4" accept="audio/*">
+                <br><br>
+                <label>Volume: <input type="range" id="volume4" min="0" max="100" value="50"></label>
+                <br><br>
+                <label>Pitch: <input type="range" id="pitch4" min="50" max="200" value="100" step="1"></label>
+                <span id="pitchValue4">100%</span>
+                <br><br>
+                <label>Distortion: <input type="range" id="distortion4" min="0" max="100" value="0" step="1"></label>
+                <span id="distortionValue4">0%</span>
+                <br><br>
+                <label>Ring Modulator: <input type="range" id="ringMod4" min="0" max="100" value="0" step="1"></label>
+                <span id="ringModValue4">0%</span>
+                <br><br>
+                <label>Filter: 
+                    <select id="filterType4">
+                        <option value="lowpass">Lowpass</option>
+                        <option value="highpass">Highpass</option>
+                        <option value="bandpass">Bandpass</option>
+                        <option value="none" selected>None</option>
+                    </select>
+                </label>
+                <br><br>
+                <label>Filter Frequency: <input type="range" id="filterFreq4" min="-100" max="100" value="0" step="1"></label>
+                <span id="filterFreqValue4">1000 Hz</span>
+                <br><br>
+                <div >
+                    <label class="loops">Start Point: <input type="range" id="start4" min="0" max="100" value="0" step="0.1"></label>
+                    <span id="startValue4">0.0s</span>
+                    <br>
+                    <label class="loops">End Point: <input type="range" id="end4" min="0" max="100" value="100" step="0.1"></label>
+                    <span id="endValue4">0.0s</span>
+                </div>
+                <br>
+                <button id="play4">Play</button>
+                <button id="stop4">Stop</button>
+            </div>
+        </div>
+
+        <button id="playAll" style="padding: 10px 20px; margin: 10px; font-size: 16px;">Play All</button>
+        <button id="stopAll" style="padding: 10px 20px; margin: 10px; font-size: 16px;">Stop All</button>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="/">loop arror by possebeats.de</a>
+
+             <a
+               href="https://github.com/dubposse/loop-arror"
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+             | GitHub
+             </a>
+
+            <a href="/impressum/">| imprint</a>
+        </div>
+    </footer>
+
+    <script>
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        // Master compressor
+        const masterCompressor = audioContext.createDynamicsCompressor();
+        const masterGain = audioContext.createGain();
+        masterCompressor.connect(masterGain);
+        masterGain.connect(audioContext.destination);
+        
+        const compressorPresets = {
+            gentle: { threshold: -40, knee: 12, ratio: 3, attack: 0.003, release: 0.25 },
+            medium: { threshold: -24, knee: 30, ratio: 12, attack: 0.003, release: 0.25 },
+            heavy: { threshold: -18, knee: 6, ratio: 20, attack: 0.001, release: 0.1 },
+            limiter: { threshold: -6, knee: 2, ratio: 20, attack: 0.001, release: 0.05 }
+        };
+        
+        function applyCompressorPreset(preset) {
+            masterCompressor.threshold.value = preset.threshold;
+            masterCompressor.knee.value = preset.knee;
+            masterCompressor.ratio.value = preset.ratio;
+            masterCompressor.attack.value = preset.attack;
+            masterCompressor.release.value = preset.release;
+            
+            document.getElementById('compThreshold').value = preset.threshold;
+            document.getElementById('compThresholdValue').textContent = preset.threshold + ' dB';
+            document.getElementById('compKnee').value = preset.knee;
+            document.getElementById('compKneeValue').textContent = preset.knee + ' dB';
+            document.getElementById('compRatio').value = preset.ratio;
+            document.getElementById('compRatioValue').textContent = preset.ratio + ':1';
+            document.getElementById('compAttack').value = preset.attack;
+            document.getElementById('compAttackValue').textContent = preset.attack + ' s';
+            document.getElementById('compRelease').value = preset.release;
+            document.getElementById('compReleaseValue').textContent = preset.release + ' s';
+        }
+        
+        applyCompressorPreset(compressorPresets.medium);
+        
+        const loops = [
+            { audio: null, source: null, gainNode: null, filterNode: null, distortionNode: null, ringModGain: null, ringModOsc: null, dryGain: null, wetGain: null, startPoint: 0, endPoint: 0 },
+            { audio: null, source: null, gainNode: null, filterNode: null, distortionNode: null, ringModGain: null, ringModOsc: null, dryGain: null, wetGain: null, startPoint: 0, endPoint: 0 },
+            { audio: null, source: null, gainNode: null, filterNode: null, distortionNode: null, ringModGain: null, ringModOsc: null, dryGain: null, wetGain: null, startPoint: 0, endPoint: 0 },
+            { audio: null, source: null, gainNode: null, filterNode: null, distortionNode: null, ringModGain: null, ringModOsc: null, dryGain: null, wetGain: null, startPoint: 0, endPoint: 0 }
+        ];
+
+        // Toggle compressor
+        document.getElementById('compEnabled').addEventListener('change', function(e) {
+            if (e.target.checked) {
+                masterCompressor.connect(masterGain);
+            } else {
+                masterCompressor.disconnect();
+                loops.forEach(loop => {
+                    if (loop.gainNode) {
+                        loop.gainNode.disconnect();
+                        loop.gainNode.connect(masterGain);
+                    }
+                });
+            }
+            loops.forEach(loop => {
+                if (loop.gainNode && e.target.checked) {
+                    loop.gainNode.disconnect();
+                    loop.gainNode.connect(masterCompressor);
+                }
+            });
+        });
+
+        // Preset selector
+        document.getElementById('compPreset').addEventListener('change', function(e) {
+            if (e.target.value !== 'custom') {
+                applyCompressorPreset(compressorPresets[e.target.value]);
+            }
+        });
+
+        // Toggle advanced settings
+        document.getElementById('toggleCompDetails').addEventListener('click', function() {
+            const details = document.getElementById('compDetails');
+            if (details.style.display === 'none') {
+                details.style.display = 'block';
+                this.textContent = 'Hide Advanced';
+            } else {
+                details.style.display = 'none';
+                this.textContent = 'Show Advanced';
+            }
+        });
+
+        // Master compressor controls
+        document.getElementById('compThreshold').addEventListener('input', function(e) {
+            masterCompressor.threshold.value = parseFloat(e.target.value);
+            document.getElementById('compThresholdValue').textContent = e.target.value + ' dB';
+            document.getElementById('compPreset').value = 'custom';
+        });
+
+        document.getElementById('compKnee').addEventListener('input', function(e) {
+            masterCompressor.knee.value = parseFloat(e.target.value);
+            document.getElementById('compKneeValue').textContent = e.target.value + ' dB';
+            document.getElementById('compPreset').value = 'custom';
+        });
+
+        document.getElementById('compRatio').addEventListener('input', function(e) {
+            masterCompressor.ratio.value = parseFloat(e.target.value);
+            document.getElementById('compRatioValue').textContent = e.target.value + ':1';
+            document.getElementById('compPreset').value = 'custom';
+        });
+
+        document.getElementById('compAttack').addEventListener('input', function(e) {
+            masterCompressor.attack.value = parseFloat(e.target.value);
+            document.getElementById('compAttackValue').textContent = e.target.value + ' s';
+            document.getElementById('compPreset').value = 'custom';
+        });
+
+        document.getElementById('compRelease').addEventListener('input', function(e) {
+            masterCompressor.release.value = parseFloat(e.target.value);
+            document.getElementById('compReleaseValue').textContent = e.target.value + ' s';
+            document.getElementById('compPreset').value = 'custom';
+        });
+
+        function makeDistortionCurve(amount) {
+            const samples = 44100;
+            const curve = new Float32Array(samples);
+            const deg = Math.PI / 180;
+            
+            for (let i = 0; i < samples; i++) {
+                const x = (i * 2) / samples - 1;
+                curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+            }
+            return curve;
+        }
+
+        function mapFrequency(value) {
+            const normalized = (value + 100) / 200;
+            return 20 * Math.pow(1000, normalized);
+        }
+
+        function createLoopLabel(fileName) {
+            const name = fileName.replace(/\.[^/.]+$/, '').replace(/[^a-z0-9]/gi, '');
+            const characters = name || 'xx';
+            let prefix = '';
+
+            while (prefix.length < 2) {
+                prefix += characters[Math.floor(Math.random() * characters.length)];
+            }
+
+            return prefix + 'Arror';
+        }
+
+        for (let i = 1; i <= 4; i++) {
+            document.getElementById(`file${i}`).addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    document.getElementById(`loadLabel${i}`).textContent = createLoopLabel(file.name);
+                    const url = URL.createObjectURL(file);
+                    loops[i-1].audio = new Audio(url);
+                    loops[i-1].audio.loop = false;
+                    loops[i-1].audio.playbackRate = document.getElementById(`pitch${i}`).value / 100;
+                    
+                    // Create audio nodes
+                    loops[i-1].source = audioContext.createMediaElementSource(loops[i-1].audio);
+                    loops[i-1].gainNode = audioContext.createGain();
+                    loops[i-1].filterNode = audioContext.createBiquadFilter();
+                    loops[i-1].distortionNode = audioContext.createWaveShaper();
+                    
+                    // Ring modulator setup
+                    loops[i-1].dryGain = audioContext.createGain();
+                    loops[i-1].wetGain = audioContext.createGain();
+                    loops[i-1].ringModGain = audioContext.createGain();
+                    loops[i-1].ringModOsc = audioContext.createOscillator();
+                    
+                    loops[i-1].ringModOsc.frequency.value = 30;
+                    loops[i-1].ringModOsc.start();
+                    
+                    loops[i-1].dryGain.gain.value = 1;
+                    loops[i-1].wetGain.gain.value = 0;
+                    
+                    loops[i-1].gainNode.gain.value = document.getElementById(`volume${i}`).value / 100;
+                    loops[i-1].filterNode.type = 'lowpass';
+                    loops[i-1].filterNode.frequency.value = 1000;
+                    loops[i-1].distortionNode.curve = makeDistortionCurve(0);
+                    loops[i-1].distortionNode.oversample = '4x';
+                    
+                    // Connect nodes
+                    loops[i-1].source.connect(loops[i-1].distortionNode);
+                    loops[i-1].distortionNode.connect(loops[i-1].filterNode);
+                    
+                    loops[i-1].filterNode.connect(loops[i-1].dryGain);
+                    loops[i-1].dryGain.connect(loops[i-1].gainNode);
+                    
+                    loops[i-1].filterNode.connect(loops[i-1].ringModGain);
+                    loops[i-1].ringModOsc.connect(loops[i-1].ringModGain.gain);
+                    loops[i-1].ringModGain.connect(loops[i-1].wetGain);
+                    loops[i-1].wetGain.connect(loops[i-1].gainNode);
+                    
+                    loops[i-1].gainNode.connect(masterCompressor);
+                    
+                    loops[i-1].audio.addEventListener('loadedmetadata', function() {
+                        const duration = loops[i-1].audio.duration;
+                        loops[i-1].endPoint = duration;
+                        document.getElementById(`endValue${i}`).textContent = duration.toFixed(1) + 's';
+                    });
+
+                    loops[i-1].audio.addEventListener('timeupdate', function() {
+                        if (loops[i-1].audio.currentTime >= loops[i-1].endPoint) {
+                            loops[i-1].audio.currentTime = loops[i-1].startPoint;
+                        }
+                    });
+                }
+            });
+
+            document.getElementById(`volume${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].gainNode) {
+                    loops[i-1].gainNode.gain.value = e.target.value / 100;
+                }
+            });
+
+            document.getElementById(`pitch${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].audio) {
+                    loops[i-1].audio.playbackRate = e.target.value / 100;
+                    document.getElementById(`pitchValue${i}`).textContent = e.target.value + '%';
+                }
+            });
+
+            document.getElementById(`distortion${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].distortionNode) {
+                    const amount = parseInt(e.target.value);
+                    loops[i-1].distortionNode.curve = makeDistortionCurve(amount);
+                    document.getElementById(`distortionValue${i}`).textContent = amount + '%';
+                }
+            });
+
+            document.getElementById(`ringMod${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].dryGain && loops[i-1].wetGain) {
+                    const wetAmount = e.target.value / 100;
+                    const dryAmount = 1 - wetAmount;
+                    loops[i-1].dryGain.gain.value = dryAmount;
+                    loops[i-1].wetGain.gain.value = wetAmount;
+                    document.getElementById(`ringModValue${i}`).textContent = e.target.value + '%';
+                }
+            });
+
+            document.getElementById(`filterType${i}`).addEventListener('change', function(e) {
+                if (loops[i-1].filterNode) {
+                    if (e.target.value === 'none') {
+                        loops[i-1].distortionNode.disconnect();
+                        loops[i-1].distortionNode.connect(loops[i-1].dryGain);
+                        loops[i-1].distortionNode.connect(loops[i-1].ringModGain);
+                    } else {
+                        loops[i-1].distortionNode.disconnect();
+                        loops[i-1].distortionNode.connect(loops[i-1].filterNode);
+                        loops[i-1].filterNode.type = e.target.value;
+                    }
+                }
+            });
+
+            document.getElementById(`filterFreq${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].filterNode) {
+                    const freq = mapFrequency(parseFloat(e.target.value));
+                    loops[i-1].filterNode.frequency.value = freq;
+                    document.getElementById(`filterFreqValue${i}`).textContent = Math.round(freq) + ' Hz';
+                }
+            });
+
+            document.getElementById(`start${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].audio && loops[i-1].audio.duration) {
+                    const duration = loops[i-1].audio.duration;
+                    loops[i-1].startPoint = (e.target.value / 100) * duration;
+                    document.getElementById(`startValue${i}`).textContent = loops[i-1].startPoint.toFixed(1) + 's';
+                }
+            });
+
+            document.getElementById(`end${i}`).addEventListener('input', function(e) {
+                if (loops[i-1].audio && loops[i-1].audio.duration) {
+                    const duration = loops[i-1].audio.duration;
+                    loops[i-1].endPoint = (e.target.value / 100) * duration;
+                    document.getElementById(`endValue${i}`).textContent = loops[i-1].endPoint.toFixed(1) + 's';
+                }
+            });
+
+            document.getElementById(`play${i}`).addEventListener('click', function() {
+                if (loops[i-1].audio) {
+                    audioContext.resume();
+                    loops[i-1].audio.currentTime = loops[i-1].startPoint;
+                    loops[i-1].audio.play();
+                }
+            });
+
+            document.getElementById(`stop${i}`).addEventListener('click', function() {
+                if (loops[i-1].audio) {
+                    loops[i-1].audio.pause();
+                    loops[i-1].audio.currentTime = loops[i-1].startPoint;
+                }
+            });
+        }
+
+        document.getElementById('playAll').addEventListener('click', function() {
+            audioContext.resume();
+            loops.forEach((loop, index) => {
+                if (loop.audio) {
+                    loop.audio.currentTime = loop.startPoint;
+                    loop.audio.play();
+                }
+            });
+        });
+
+        document.getElementById('stopAll').addEventListener('click', function() {
+            loops.forEach((loop, index) => {
+                if (loop.audio) {
+                    loop.audio.pause();
+                    loop.audio.currentTime = loop.startPoint;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
